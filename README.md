@@ -1,2 +1,2 @@
-# go_training
+# Golang
 API REST for training
