@@ -1,7 +1,9 @@
 package main
 
 import (
+    "io"
     "fmt"
+    "bytes"
     "encoding/json"
     "net/http"
     "net/http/httptest"
@@ -17,7 +19,7 @@ var router = SetupRouter(db)
 
 func TestGetItems(t *testing.T) {
     // Perform a GET request with that router
-    w := performRequest(router, "GET", "/items")
+    w := performRequest(router, "GET", "/items", nil)
 
     // Assert we encoded correctly the request gives a 200
     assert.Equal(t, http.StatusOK, w.Code)
@@ -42,7 +44,7 @@ func TestGetItem(t *testing.T) {
     idForTest := 1
 
     // Perform a GET request with that router
-    w := performRequest(router, "GET", fmt.Sprintf("/item/%d", idForTest))
+    w := performRequest(router, "GET", fmt.Sprintf("/item/%d", idForTest), nil)
 
     // Assert we encoded correctly the request gives a 200
     assert.Equal(t, http.StatusOK, w.Code)
@@ -60,8 +62,23 @@ func TestGetItem(t *testing.T) {
     assert.NotEmpty(t, response.Description)
 }
 
-func performRequest(r http.Handler, method, endpoint string) *httptest.ResponseRecorder {
-    req, _ := http.NewRequest(method, endpoint, nil)
+func TestUpdateItem(t *testing.T) {
+    // Item to post new data
+    item := models.Item{
+        Title: "New title",
+        Description:"New description",
+    }
+    body, _ := json.Marshal(item)
+
+    // Perform a POST request with that router
+    w := performRequest(router, "POST", "/item", bytes.NewBuffer(body))
+
+    // Assert we encoded correctly the request gives a 201
+    assert.Equal(t, http.StatusCreated, w.Code)
+}
+
+func performRequest(r http.Handler, method, endpoint string, body io.Reader) *httptest.ResponseRecorder {
+    req, _ := http.NewRequest(method, endpoint, body)
     w := httptest.NewRecorder()
     r.ServeHTTP(w, req)
     return w
