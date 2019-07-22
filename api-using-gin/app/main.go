@@ -3,11 +3,11 @@ package main
 import (
     "log"
     "database/sql"
-    "github.com/gin-gonic/gin"
 
-    "./routes"
-    "./database"
-    "./controllers"
+    "../routes"
+    "../database"
+    "../controllers"
+    "github.com/gin-gonic/gin"
 )
 
 func main() {

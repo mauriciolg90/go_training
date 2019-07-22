@@ -6,7 +6,7 @@ import (
     "net/http/httptest"
     "testing"
 
-    "./models"
+    "../models"
     "github.com/stretchr/testify/assert"
 )
 
@@ -32,7 +32,7 @@ func TestGetItems(t *testing.T) {
     var response []models.Item
     err := json.Unmarshal([]byte(w.Body.String()), &response)
 
-    // Assert we decoded correctly the respose
+    // Assert we decoded correctly the response
     assert.Nil(t, err)
 
     // Assert all the fields
