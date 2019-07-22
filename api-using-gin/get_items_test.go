@@ -6,7 +6,7 @@ import (
     "net/http/httptest"
     "testing"
 
-    "github.com/gin-gonic/gin"
+    "./models"
     "github.com/stretchr/testify/assert"
 )
 
@@ -17,12 +17,7 @@ func performRequest(r http.Handler, method, endpoint string) *httptest.ResponseR
     return w
 }
 
-// TODAVIA NO ESTA CHEQUEADO!!
 func TestGetItems(t *testing.T) {
-    // Build our expected body
-    body := gin.H{
-        "hello": "world",
-    }
     // Setup database and router
     db := SetupDatabase()
     router := SetupRouter(db)
@@ -33,15 +28,17 @@ func TestGetItems(t *testing.T) {
     // Assert we encoded correctly the request gives a 200
     assert.Equal(t, http.StatusOK, w.Code)
 
-    // Convert the JSON response to a map
-    var response map[string]string
+    // Convert the JSON response to a slice
+    var response []models.Item
     err := json.Unmarshal([]byte(w.Body.String()), &response)
 
-    // Grab the value & whether or not it exists
-    value, exists := response["hello"]
-
-    // Make some assertions on the correctness of the response
+    // Assert we decoded correctly the respose
     assert.Nil(t, err)
-    assert.True(t, exists)
-    assert.Equal(t, body["hello"], value)
+
+    // Assert all the fields
+    for _, item := range response {
+        assert.Greater(t, item.Id, 0)
+        assert.NotEmpty(t, item.Title)
+        assert.NotEmpty(t, item.Description)
+    }
 }
