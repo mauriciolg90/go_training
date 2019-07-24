@@ -7,37 +7,38 @@ import (
     "../domain/value"
 )
 
+// Internal var (initialized to nil)
+var tinder Tinder
+
 // Represents the application to be called by interface layer
 type Tinder interface {
-    GetPerson(id int64) (*entity.Person, error)
     GetPersons() ([]*entity.Person, error)
+    GetPerson(id int64) (*entity.Person, error)
     AddPerson(name string) error
     GetPersonMatch(id int64, x, y int) (*entity.Person, error)
 }
 
-var tinder Tinder
-
 // It's the implementation of Tinder
 type TinderImpl struct{}
-
-// Returns the current application
-func GetTinder() Tinder {
-    return tinder
-}
 
 // Sets a new application with its implementation
 func SetTinder(newTinder Tinder) {
     tinder = newTinder
 }
 
-// Returns a person with the given id
-func (t *TinderImpl) GetPerson(id int64) (*entity.Person, error) {
-    return repository.GetPersonRepository().Get(id)
+// Returns the current application
+func GetTinder() Tinder {
+    return tinder
 }
 
 // Returns all persons stored in repository
 func (t *TinderImpl) GetPersons() ([]*entity.Person, error) {
     return repository.GetPersonRepository().GetAll()
+}
+
+// Returns a person with the given id
+func (t *TinderImpl) GetPerson(id int64) (*entity.Person, error) {
+    return repository.GetPersonRepository().Get(id)
 }
 
 // Sets a new person with the given name to repository
