@@ -3,8 +3,8 @@ package main
 import (
     "../application"
     "../domain/repository"
-    "../interface/web"
     "../infrastructure/persistence"
+    "../interface/web"
 )
 
 func main() {

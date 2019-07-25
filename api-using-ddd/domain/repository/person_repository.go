@@ -11,7 +11,7 @@ var personRepository PersonRepository
 type PersonRepository interface {
     GetAll() ([]*entity.Person, error)
     Get(ID int64) (*entity.Person, error)
-    Save(person *entity.Person) error
+    Add(person *entity.Person) error
 }
 
 // Sets a new repository with its implementation

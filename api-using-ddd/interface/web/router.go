@@ -9,7 +9,7 @@ func Router() *gin.Engine {
     router := gin.Default()
     router.GET("/persons", getPersons)
     router.GET("/persons/:id", getPerson)
-    router.GET("/persons-match/:id", getPersonMatch)
     router.POST("/persons", addPerson)
+    router.GET("/persons-match/:id", getPersonMatch)
     return router
 }

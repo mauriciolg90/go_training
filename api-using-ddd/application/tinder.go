@@ -41,11 +41,9 @@ func (t *TinderImpl) GetPerson(id int64) (*entity.Person, error) {
     return repository.GetPersonRepository().Get(id)
 }
 
-// Sets a new person with the given name to repository
+// Adds a new person with the given name
 func (t *TinderImpl) AddPerson(name string) error {
-    return repository.GetPersonRepository().Save(&entity.Person{
-        Name: name,
-    })
+    return repository.GetPersonRepository().Add(&entity.Person{Name: name,})
 }
 
 // Gets a matching person from MatchingService given a person's id and x, y location

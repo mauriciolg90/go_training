@@ -9,7 +9,7 @@ import (
     "../../domain/entity"
 )
 
-// Returns a pointer to the database connection
+// Returns a pointer representing the database connection
 func SetupDB(driver, user, pass, host, schema string) *sql.DB {
     db, err := sql.Open(driver, user + ":" + pass + "@" + host + "/" + schema)
 
@@ -31,8 +31,9 @@ type PersonRepositoryImpl struct {
     DB *sql.DB
 }
 
-// Returns all persons stored in database
+// Returns all persons stored in repository
 func (r *PersonRepositoryImpl) GetAll() ([]*entity.Person, error) {
+    // SQL query
     const query = `SELECT * FROM persons`
     rows, err := r.DB.Query(query)
 
@@ -43,7 +44,7 @@ func (r *PersonRepositoryImpl) GetAll() ([]*entity.Person, error) {
     // Get all persons iterating the rows
     persons := []*entity.Person{}
     for rows.Next() {
-        // Save the entities
+        // Save the entity
         var person entity.Person
         err = rows.Scan(&person.ID, &person.Name)
         if err != nil {
@@ -55,23 +56,26 @@ func (r *PersonRepositoryImpl) GetAll() ([]*entity.Person, error) {
     return persons, nil
 }
 
-// Returns a person from the database with the id
+// Returns a person with the given id
 func (r *PersonRepositoryImpl) Get(id int64) (*entity.Person, error) {
-    /*if r.DB[id] == nil {
-        return nil, errors.New("Person not found")
-    }*/
+    var person entity.Person
 
-    //return r.DB[id], nil
-    return nil, nil
+    // SQL query
+    const query = `SELECT * FROM persons WHERE id=?`
+    err := r.DB.QueryRow(query, id).Scan(&person.ID, &person.Name)
+
+    return &person, err
 }
 
-// Inserts a person to database
-func (r *PersonRepositoryImpl) Save(person *entity.Person) error {
+// Adds a new person with the given name
+func (r *PersonRepositoryImpl) Add(person *entity.Person) error {
     if person == nil {
         return errors.New("Nil person!!")
     }
 
-    //person.ID = int64(len(r.DB) + 1)
-    //r.DB[person.ID] = person
-    return nil
+    // SQL query (ID is autoincrement!!)
+    const query = `INSERT INTO persons (name) VALUES (?)`
+    _, err := r.DB.Exec(query, person.Name)
+
+    return err
 }
