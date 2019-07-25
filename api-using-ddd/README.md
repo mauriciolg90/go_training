@@ -32,9 +32,9 @@ domain/
 | value/  
 | | location.go  
 infrastructure/  
+| main.go  
 | persistence/  
 | | person_repository.go  
-| | main.go  
 interface/  
 | web/  
 | | controller.go  
