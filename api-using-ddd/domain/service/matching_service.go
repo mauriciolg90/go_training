@@ -1,6 +1,8 @@
 package service
 
 import (
+    "math/rand"
+
     "../entity"
     "../repository"
     "../value"
@@ -36,8 +38,11 @@ func (s *MatchingServiceImpl) FindMatch(location value.Location) (*entity.Person
         return nil, err
     }
 
-    // FIXME, aca buscar un match en base a la ubicacion
-    match := persons[0]
+    // Find match according to the location (RANDOM implementation)
+    rand.Seed(int64(location.X + location.Y))
+    min, max := 0, len(persons)
+    number := rand.Intn(max - min) + min
+    match := persons[number]
 
     return match, nil
 }
