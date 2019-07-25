@@ -1,7 +1,7 @@
 # DDD's project in Go
 
 application/
-| tinder.go
+| finder.go
 domain/
 | entity/
 | | person.go
@@ -14,7 +14,8 @@ domain/
 infrastructure/
 | persistence/
 | | person_repository.go
+| | main.go
 interface/
 | web/
-| | tinder.go
+| | controller.go
 | | router.go
