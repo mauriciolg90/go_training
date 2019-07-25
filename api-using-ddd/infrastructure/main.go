@@ -10,7 +10,7 @@ import (
 
 func main() {
     // We init a new database connection and a person repository
-    sqlDB := persistence.SetupDB("mysql", "root", "root", "tcp(localhost:3306)", "golang")
+    sqlDB := persistence.GetDB("mysql", "root", "root", "tcp(localhost:3306)", "golang")
     personRepository := &persistence.PersonRepositoryImpl{DB: sqlDB}
     repository.SetPersonRepository(personRepository)
 

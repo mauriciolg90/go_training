@@ -10,7 +10,7 @@ import (
 )
 
 // Returns a pointer representing the database connection
-func SetupDB(driver, user, pass, host, schema string) *sql.DB {
+func GetDB(driver, user, pass, host, schema string) *sql.DB {
     db, err := sql.Open(driver, user + ":" + pass + "@" + host + "/" + schema)
 
     if err != nil {

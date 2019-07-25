@@ -34,7 +34,7 @@ domain/
 infrastructure/  
 | main.go  
 | persistence/  
-| | person_repository.go  
+| | person_repository.go <--- Factory  
 interface/  
 | web/  
 | | controller.go  
