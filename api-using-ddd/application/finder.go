@@ -7,7 +7,7 @@ import (
     "../domain/value"
 )
 
-// Internal var (initialized to nil)
+// Singleton object (initialized to nil)
 var finder Finder
 
 // Represents the application to be called by interface layer

@@ -21,14 +21,14 @@ $ curl -i -X GET http://localhost:8080/persons-match -H "Accept: application/jso
 ## Project hierarchy
 
 application/  
-| finder.go  
+| finder.go <--- Singleton  
 domain/  
 | entity/  
 | | person.go  
 | repository/  
-| | person_repository.go  
+| | person_repository.go <--- Singleton  
 | service/  
-| | matching_service.go  
+| | matching_service.go <--- Singleton  
 | value/  
 | | location.go  
 infrastructure/  

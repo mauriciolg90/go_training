@@ -4,7 +4,7 @@ import (
     "../entity"
 )
 
-// Internal var (initialized to nil)
+// Singleton object (initialized to nil)
 var personRepository PersonRepository
 
 // Represents a storage of all existing persons

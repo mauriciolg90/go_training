@@ -8,7 +8,7 @@ import (
     "../value"
 )
 
-// Internal var (initialized to nil)
+// Singleton object (initialized to nil)
 var matchingService MatchingService
 
 // Represents the service to find a match
