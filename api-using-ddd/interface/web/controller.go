@@ -12,7 +12,7 @@ import (
 
 func getPersons(context *gin.Context) {
     // Get all persons stored in repository
-    persons, err := application.GetTinder().GetPersons()
+    persons, err := application.GetFinder().GetPersons()
 
     // Check application error
     if err != nil {
@@ -37,7 +37,7 @@ func getPerson(context *gin.Context) {
     }
 
     // Get a person with the given id
-    person, err := application.GetTinder().GetPerson(id)
+    person, err := application.GetFinder().GetPerson(id)
 
     // Check application error
     if err != nil {
@@ -51,7 +51,7 @@ func getPerson(context *gin.Context) {
 }
 
 func addPerson(context *gin.Context) {
-    // Get data from the request
+    // Get JSON data from the request
     rawData, _ := context.GetRawData()
 
     data := struct {
@@ -67,7 +67,7 @@ func addPerson(context *gin.Context) {
     }
 
     // Add a new person with the given name
-    err = application.GetTinder().AddPerson(data.Name)
+    err = application.GetFinder().AddPerson(data.Name)
 
     // Check application error
     if err != nil {
@@ -81,31 +81,31 @@ func addPerson(context *gin.Context) {
 }
 
 func getPersonMatch(context *gin.Context) {
-    id, err := strconv.ParseInt(context.Param("id"), 10, 64)
-
-    if err != nil {
-        context.JSON(http.StatusBadRequest, err)
-        return
-    }
-
+    // Get JSON data from the request
     rawData, _ := context.GetRawData()
+
     data := struct {
         X int `json:"x"`
         Y int `json:"y"`
     }{}
-    err = json.Unmarshal(rawData, &data)
+    err := json.Unmarshal(rawData, &data)
 
+    // Check JSON decoding
     if err != nil {
         context.JSON(http.StatusBadRequest, err)
+        log.Println("Error:", err)
         return
     }
 
-    match, err := application.GetTinder().GetPersonMatch(id, data.X, data.Y)
+    match, err := application.GetFinder().GetPersonMatch(data.X, data.Y)
 
+    // Check application error
     if err != nil {
         context.JSON(http.StatusInternalServerError, err)
+        log.Println("Error:", err)
         return
     }
 
+    // Operation was successful!
     context.JSON(http.StatusOK, match)
 }

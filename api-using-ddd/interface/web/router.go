@@ -10,6 +10,6 @@ func Router() *gin.Engine {
     router.GET("/persons", getPersons)
     router.GET("/persons/:id", getPerson)
     router.POST("/persons", addPerson)
-    router.GET("/persons-match/:id", getPersonMatch)
+    router.GET("/persons-match", getPersonMatch)
     return router
 }
