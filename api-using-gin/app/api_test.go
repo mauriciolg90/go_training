@@ -9,7 +9,7 @@ import (
     "net/http/httptest"
     "testing"
 
-    "../models"
+    "github.com/mauriciolg90/go_training/api-using-gin/models"
     "github.com/stretchr/testify/assert"
 )
 

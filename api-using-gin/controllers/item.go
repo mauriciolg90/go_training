@@ -6,8 +6,8 @@ import (
     "net/http"
     "database/sql"
 
-    "../services"
     "github.com/gin-gonic/gin"
+    "github.com/mauriciolg90/go_training/api-using-gin/repository"
 )
 
 type ItemInterface interface {
@@ -35,7 +35,7 @@ func (itemCtrl *ItemController) GetItemHandler(context *gin.Context) {
         return
     }
     // Call to the API to build a query
-    item, err := services.GetItem(itemCtrl.dbPtr, idInteger)
+    item, err := repository.GetItem(itemCtrl.dbPtr, idInteger)
     if err != nil {
         if err == sql.ErrNoRows {
             context.String(http.StatusNotFound, "Item not found!")
@@ -51,7 +51,7 @@ func (itemCtrl *ItemController) GetItemHandler(context *gin.Context) {
 
 func (itemCtrl *ItemController) GetItemsHandler(context *gin.Context) {
     // Call to the API to build a query
-    items, err := services.GetItems(itemCtrl.dbPtr)
+    items, err := repository.GetItems(itemCtrl.dbPtr)
     if err != nil {
         context.String(http.StatusInternalServerError, "API error!")
         log.Println("err", err)
@@ -66,7 +66,7 @@ func (itemCtrl *ItemController) CreateItemHandler(context *gin.Context) {
     title := context.PostForm("title")
     description := context.PostForm("description")
     // Call to the API to build a query
-    err := services.CreateItem(itemCtrl.dbPtr, title, description)
+    err := repository.CreateItem(itemCtrl.dbPtr, title, description)
     if err != nil {
         context.String(http.StatusInternalServerError, "API error!")
         log.Println("err", err)
@@ -88,7 +88,7 @@ func (itemCtrl *ItemController) UpdateItemHandler(context *gin.Context) {
         return
     }
     // Call to the API to build a query
-    err = services.UpdateItem(itemCtrl.dbPtr, idInteger, title, description)
+    err = repository.UpdateItem(itemCtrl.dbPtr, idInteger, title, description)
     if err != nil {
         context.String(http.StatusInternalServerError, "API error!")
         log.Println("err", err)
@@ -107,7 +107,7 @@ func (itemCtrl *ItemController) DeleteItemHandler(context *gin.Context) {
         return
     }
     // Call to the API to build a query
-    err = services.DeleteItem(itemCtrl.dbPtr, idInteger)
+    err = repository.DeleteItem(itemCtrl.dbPtr, idInteger)
     if err != nil {
         context.String(http.StatusInternalServerError, "API error!")
         log.Println("err", err)

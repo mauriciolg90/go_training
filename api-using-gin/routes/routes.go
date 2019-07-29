@@ -1,8 +1,8 @@
 package routes
 
 import (
-    "../controllers"
     "github.com/gin-gonic/gin"
+    "github.com/mauriciolg90/go_training/api-using-gin/controllers"
 )
 
 func CreateItemRoutes(router *gin.Engine, itemCtrl *controllers.ItemController) {

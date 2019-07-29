@@ -1,9 +1,9 @@
-package services
+package repository
 
 import (
     "database/sql"
 
-    "../models"
+    "github.com/mauriciolg90/go_training/api-using-gin/models"
 )
 
 func GetItems(dbPtr *sql.DB) ([]*models.Item, error) {

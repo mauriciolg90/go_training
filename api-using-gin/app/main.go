@@ -4,10 +4,10 @@ import (
     "log"
     "database/sql"
 
-    "../routes"
-    "../database"
-    "../controllers"
     "github.com/gin-gonic/gin"
+    "github.com/mauriciolg90/go_training/api-using-gin/controllers"
+    "github.com/mauriciolg90/go_training/api-using-gin/database"
+    "github.com/mauriciolg90/go_training/api-using-gin/routes"
 )
 
 func main() {
