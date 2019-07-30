@@ -6,7 +6,7 @@ import (
     "log"
 
     _ "github.com/go-sql-driver/mysql"
-    "../../domain/entity"
+    "github.com/mauriciolg90/go_training/api-using-ddd/domain/entity"
 )
 
 // Returns a pointer representing the database connection

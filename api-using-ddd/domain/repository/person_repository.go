@@ -1,7 +1,7 @@
 package repository
 
 import (
-    "../entity"
+    "github.com/mauriciolg90/go_training/api-using-ddd/domain/entity"
 )
 
 // Singleton object (initialized to nil)

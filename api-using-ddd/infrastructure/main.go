@@ -1,11 +1,11 @@
 package main
 
 import (
-    "../application"
-    "../domain/repository"
-    "../domain/service"
-    "../infrastructure/persistence"
-    "../interface/web"
+    "github.com/mauriciolg90/go_training/api-using-ddd/application"
+    "github.com/mauriciolg90/go_training/api-using-ddd/domain/repository"
+    "github.com/mauriciolg90/go_training/api-using-ddd/domain/service"
+    "github.com/mauriciolg90/go_training/api-using-ddd/infrastructure/persistence"
+    "github.com/mauriciolg90/go_training/api-using-ddd/interface/web"
 )
 
 func main() {

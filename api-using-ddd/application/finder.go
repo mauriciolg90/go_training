@@ -1,10 +1,10 @@
 package application
 
 import (
-    "../domain/entity"
-    "../domain/repository"
-    "../domain/service"
-    "../domain/value"
+    "github.com/mauriciolg90/go_training/api-using-ddd/domain/entity"
+    "github.com/mauriciolg90/go_training/api-using-ddd/domain/repository"
+    "github.com/mauriciolg90/go_training/api-using-ddd/domain/service"
+    "github.com/mauriciolg90/go_training/api-using-ddd/domain/value"
 )
 
 // Singleton object (initialized to nil)

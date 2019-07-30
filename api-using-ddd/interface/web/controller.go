@@ -7,7 +7,7 @@ import (
     "strconv"
 
     "github.com/gin-gonic/gin"
-    "../../application"
+    "github.com/mauriciolg90/go_training/api-using-ddd/application"
 )
 
 func getPersons(context *gin.Context) {
